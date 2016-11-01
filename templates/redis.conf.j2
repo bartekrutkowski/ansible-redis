@@ -1,3 +1,6 @@
+requirepass "{{ redis_auth_password }}"
+rename-command CONFIG "{{ redis_config_alias }}"
+
 daemonize yes
 pidfile /var/run/redis/{{ redis_daemon }}.pid
 port {{ redis_port }}

@@ -1,4 +1,8 @@
 ---
+# redis security variables
+redis_auth_password: "some-very-long-and-random-password-you-should-set"
+redis_config_alias: "leave-blank-to-disable-or-set-proper-alias"
+
 # Used for RHEL/CentOS/Fedora only. Allows the use of different repos.
 redis_enablerepo: epel
 
