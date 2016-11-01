@@ -20,9 +20,7 @@ galaxy_info:
       - all
     - name: FreeBSD
       versions:
-      - 11
-      - 10
-      - 9
+      - all
     - name: Ubuntu
       versions:
       - all
