@@ -1,8 +1,8 @@
 # Ansible Role: Redis
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-redis.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-redis)
+[![Build Status](https://travis-ci.org/bartekrutkowski/ansible-redis.svg?branch=master)](https://travis-ci.org/bartekrutkowski/ansible-redis)
 
-Installs [Redis](http://redis.io/) on RHEL/CentOS or Debian/Ubuntu.
+Installs [Redis](http://redis.io/) on FreeBSD, RHEL/CentOS or Debian/Ubuntu.
 
 ## Requirements
 
@@ -97,4 +97,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](http://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2016 by Bartek Rutkowski as a fork of role by Jeff Geerling.
