@@ -1,0 +1,5 @@
+---
+__redis_package: redis
+redis_daemon: redis
+redis_conf_path: /usr/local/etc/redis.conf
+redis_dbdir: /var/db/redis
