@@ -1,0 +1,6 @@
+---
+- name: Ensure Redis is installed.
+  pkgng:
+    name: "{{ redis_package }}"
+    state: present
+
