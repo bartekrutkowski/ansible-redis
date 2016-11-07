@@ -1,7 +1,10 @@
 ---
-# redis security variables
+# redis security related variables
 redis_auth_password: "some-very-long-and-random-password-you-should-set"
-redis_config_alias: "leave-blank-to-disable-or-set-proper-alias"
+redis_alias_prefix: "leave-blank-to-disable-or-set-proper-random_prefix"
+redis_alias_commands: [ 'bgrewriteaof', 'bgsave', 'config', 'debug',
+                        'del', 'flushall', 'flushdb', 'keys', 'pexpire',
+                        'rename', 'save', 'shutdown', 'spop', 'srem' ]
 
 # Used for RHEL/CentOS/Fedora only. Allows the use of different repos.
 redis_enablerepo: epel
@@ -12,7 +15,8 @@ redis_unixsocket: ''
 redis_timeout: 300
 
 redis_loglevel: "notice"
-redis_logfile: /var/log/redis/redis.log
+redis_logdir: /var/log/redis
+redis_logfilename: "{{ redis_logdir }}/redis.log"
 
 redis_databases: 16
 
@@ -24,7 +28,6 @@ redis_save:
 
 redis_rdbcompression: "yes"
 redis_dbfilename: dump.rdb
-redis_dbdir: /var/lib/redis
 
 redis_maxmemory: 0
 redis_maxmemory_policy: "noeviction"

@@ -1,5 +1,7 @@
 requirepass "{{ redis_auth_password }}"
-rename-command CONFIG "{{ redis_config_alias }}"
+{% for command in redis_alias_commands %}
+rename-command "{{ command }}" "{{ redis_alias_prefix }}-{{ command }}"
+{% endfor %}
 
 daemonize yes
 pidfile /var/run/redis/{{ redis_daemon }}.pid
@@ -13,7 +15,7 @@ unixsocket {{ redis_unixsocket }}
 timeout {{ redis_timeout }}
 
 loglevel {{ redis_loglevel }}
-logfile {{ redis_logfile }}
+logfile {{ redis_logfilename }}
 
 # To enable logging to the system logger, just set 'syslog-enabled' to yes,
 # and optionally update the other syslog parameters to suit your needs.
