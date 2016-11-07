@@ -3,7 +3,7 @@ dependencies: []
 
 galaxy_info:
   author: bartekrutkowski
-  description: Redis for FreeBSD and Linux forked from geerlingguy/ansible-role-redis
+  description: Redis for Linux and FreeBSD systems with focus on security
   company: "Pixeware LTD"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.0
@@ -33,3 +33,4 @@ galaxy_info:
     - memory
     - web
     - redis
+    - security
