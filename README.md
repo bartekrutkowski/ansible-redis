@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bartekrutkowski/ansible-redis.svg?branch=master)](https://travis-ci.org/bartekrutkowski/ansible-redis)
 
-Installs [Redis](http://redis.io/) on FreeBSD, RHEL/CentOS or Debian/Ubuntu.
+Installs [Redis](http://redis.io/) on RHEL/CentOS, Debian/Ubuntu and FreeBSD systems.
 
 ## Requirements
 
@@ -77,7 +77,7 @@ Valid values are `always` (slower, safest), `everysec` (happy medium), or `no` (
 
 Add extra include file paths to this list to include more/localized Redis configuration.
 
-The redis package name for installation via the system package manager. Defaults to `redis-server` on Debian and `redis` on RHEL.
+The redis package name for installation via the system package manager. Defaults to `redis` on RHEL/CentOS, `redis-server` on Debian/Ubuntu and `redis` on FreeBSD.
 
     redis_package_name: "redis28u"
 
@@ -89,7 +89,7 @@ None.
 
     - hosts: all
       roles:
-        - { role: geerlingguy.redis }
+        - { role: bartekrutkowski.redis }
 
 ## License
 
