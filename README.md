@@ -2,17 +2,49 @@
 
 [![Build Status](https://travis-ci.org/bartekrutkowski/ansible-redis.svg?branch=master)](https://travis-ci.org/bartekrutkowski/ansible-redis)
 
-Installs [Redis](http://redis.io/) on RHEL/CentOS, Debian/Ubuntu and FreeBSD systems.
+Installs [Redis](http://redis.io/) on RHEL/CentOS, Debian/Ubuntu and FreeBSD systems with secure defaults.
 
 ## Requirements
 
-On RedHat-based distributions, requires the EPEL repository (you can simply add the role `geerlingguy.repo-epel` to install ensure EPEL is available).
+On RedHat-based distributions, this role requires the EPEL repository (you can simply add the role `geerlingguy.repo-epel` to ensure EPEL repo is available).
+
+## Security enchancements
+
+Redis security model leaves all the responsibility to the users and is very dangerous service, when exposed to the Internet without changing the default settings it is being shipped with. This role, beside automating Redis installation on Linux and FreeBSD systems, ensures that every Redis instance installed using this role is configured to be as secure and production ready, as possible, from the very beginning.
+
+To achieve this, following things are changed, when compared to vanilla Redis installations provided by other roles:
+
+- AUTH password is being set
+- Potentially dangerous commands (like CONFIG, SAVE, DEBUG and others) are aliased with random prefix
+- The redis.conf config file permissions are changed to be world non-readable
+- The database and log directories permissions are changed to be world non-readable
 
 ## Role Variables
 
+### Security related variables:
+
+    redis_auth_password: "some-very-long-and-random-password-you-should-set"
+
+The password string used for AUTH command. Set it to something long and random, to make possible bruteforce attacks harder.
+
+    redis_alias_prefix: "leave-blank-to-disable-or-set-proper-random_prefix"
+
+The prefix string used to alias dangerous commands that should be hidden from casual Redis users. Set it to something long and random, to make possible bruteforce attacks harder. When left as empty string, it will actually disable the commands entirely.
+
+    redis_alias_commands: [ 'bgrewriteaof', 'bgsave', 'config', 'debug',
+                            'del', 'flushall', 'flushdb', 'keys', 'pexpire',
+                            'rename', 'save', 'shutdown', 'spop', 'srem' ]
+
+List of potentially dangerous commands to be aliased. Depending on your needs and usage case, you might want to add or
+remove the commands from this list, but leaving at least `config` command is strongly advised. If the `redis_alias_prefix` is an empty string, all of the commands on this list are going to be disabled.
+
+### RHEL/CentOS related variables:
+
     redis_enablerepo: epel
 
-(Used only on RHEL/CentOS) The repository to use for Redis installation.
+The repository to use for Redis installation, used only on RHEL/CentOS.
+
+### Generic Redis variables:
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
@@ -83,7 +115,7 @@ The redis package name for installation via the system package manager. Defaults
 
 ## Dependencies
 
-None.
+None, except for the EPEL repository for RHEL/CentOS systems.
 
 ## Example Playbook
 
@@ -97,4 +129,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2016 by Bartek Rutkowski as a fork of role by Jeff Geerling.
+This role was created in 2016 by [Bartek Rutkowski](http://github.com/bartekrutkowski) as a fork of role by Jeff Geerling.
